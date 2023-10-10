@@ -45,7 +45,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["prettier", "npm:2.8.8"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:5f7dd4d1eea4f62673df815ad4c9610fbbc12469e628cb0cf7998d43fbb0ab3e9b25d5dd5f7748afa6276159e9ca0f22c069b7a67b9c1be7e1add5e4d6f7fe4d#npm:18.2.0"],\
+            ["react-hook-form", "virtual:5f7dd4d1eea4f62673df815ad4c9610fbbc12469e628cb0cf7998d43fbb0ab3e9b25d5dd5f7748afa6276159e9ca0f22c069b7a67b9c1be7e1add5e4d6f7fe4d#npm:7.47.0"],\
             ["react-icons", "virtual:5f7dd4d1eea4f62673df815ad4c9610fbbc12469e628cb0cf7998d43fbb0ab3e9b25d5dd5f7748afa6276159e9ca0f22c069b7a67b9c1be7e1add5e4d6f7fe4d#npm:4.11.0"],\
+            ["react-loading-skeleton", "virtual:5f7dd4d1eea4f62673df815ad4c9610fbbc12469e628cb0cf7998d43fbb0ab3e9b25d5dd5f7748afa6276159e9ca0f22c069b7a67b9c1be7e1add5e4d6f7fe4d#npm:3.3.1"],\
+            ["react-spinners", "virtual:5f7dd4d1eea4f62673df815ad4c9610fbbc12469e628cb0cf7998d43fbb0ab3e9b25d5dd5f7748afa6276159e9ca0f22c069b7a67b9c1be7e1add5e4d6f7fe4d#npm:0.13.8"],\
             ["supports-color", "npm:8.1.1"],\
             ["tailwindcss", "npm:3.3.2"],\
             ["typescript", "patch:typescript@npm%3A5.0.4#~builtin<compat/typescript>::version=5.0.4&hash=b5f058"]\
@@ -1736,7 +1739,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["prettier", "npm:2.8.8"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:5f7dd4d1eea4f62673df815ad4c9610fbbc12469e628cb0cf7998d43fbb0ab3e9b25d5dd5f7748afa6276159e9ca0f22c069b7a67b9c1be7e1add5e4d6f7fe4d#npm:18.2.0"],\
+            ["react-hook-form", "virtual:5f7dd4d1eea4f62673df815ad4c9610fbbc12469e628cb0cf7998d43fbb0ab3e9b25d5dd5f7748afa6276159e9ca0f22c069b7a67b9c1be7e1add5e4d6f7fe4d#npm:7.47.0"],\
             ["react-icons", "virtual:5f7dd4d1eea4f62673df815ad4c9610fbbc12469e628cb0cf7998d43fbb0ab3e9b25d5dd5f7748afa6276159e9ca0f22c069b7a67b9c1be7e1add5e4d6f7fe4d#npm:4.11.0"],\
+            ["react-loading-skeleton", "virtual:5f7dd4d1eea4f62673df815ad4c9610fbbc12469e628cb0cf7998d43fbb0ab3e9b25d5dd5f7748afa6276159e9ca0f22c069b7a67b9c1be7e1add5e4d6f7fe4d#npm:3.3.1"],\
+            ["react-spinners", "virtual:5f7dd4d1eea4f62673df815ad4c9610fbbc12469e628cb0cf7998d43fbb0ab3e9b25d5dd5f7748afa6276159e9ca0f22c069b7a67b9c1be7e1add5e4d6f7fe4d#npm:0.13.8"],\
             ["supports-color", "npm:8.1.1"],\
             ["tailwindcss", "npm:3.3.2"],\
             ["typescript", "patch:typescript@npm%3A5.0.4#~builtin<compat/typescript>::version=5.0.4&hash=b5f058"]\
@@ -4571,6 +4577,28 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["react-hook-form", [\
+        ["npm:7.47.0", {\
+          "packageLocation": "./.yarn/cache/react-hook-form-npm-7.47.0-58fe62ab6d-dec192fec9.zip/node_modules/react-hook-form/",\
+          "packageDependencies": [\
+            ["react-hook-form", "npm:7.47.0"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:5f7dd4d1eea4f62673df815ad4c9610fbbc12469e628cb0cf7998d43fbb0ab3e9b25d5dd5f7748afa6276159e9ca0f22c069b7a67b9c1be7e1add5e4d6f7fe4d#npm:7.47.0", {\
+          "packageLocation": "./.yarn/__virtual__/react-hook-form-virtual-1489db3d9f/0/cache/react-hook-form-npm-7.47.0-58fe62ab6d-dec192fec9.zip/node_modules/react-hook-form/",\
+          "packageDependencies": [\
+            ["react-hook-form", "virtual:5f7dd4d1eea4f62673df815ad4c9610fbbc12469e628cb0cf7998d43fbb0ab3e9b25d5dd5f7748afa6276159e9ca0f22c069b7a67b9c1be7e1add5e4d6f7fe4d#npm:7.47.0"],\
+            ["@types/react", "npm:18.2.6"],\
+            ["react", "npm:18.2.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/react",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["react-icons", [\
         ["npm:4.11.0", {\
           "packageLocation": "./.yarn/cache/react-icons-npm-4.11.0-08184d1639-7b8b80bbe2.zip/node_modules/react-icons/",\
@@ -4605,6 +4633,54 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/react-is-npm-18.2.0-0cc5edb910-e72d0ba81b.zip/node_modules/react-is/",\
           "packageDependencies": [\
             ["react-is", "npm:18.2.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["react-loading-skeleton", [\
+        ["npm:3.3.1", {\
+          "packageLocation": "./.yarn/cache/react-loading-skeleton-npm-3.3.1-b364092891-0de3437a5d.zip/node_modules/react-loading-skeleton/",\
+          "packageDependencies": [\
+            ["react-loading-skeleton", "npm:3.3.1"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:5f7dd4d1eea4f62673df815ad4c9610fbbc12469e628cb0cf7998d43fbb0ab3e9b25d5dd5f7748afa6276159e9ca0f22c069b7a67b9c1be7e1add5e4d6f7fe4d#npm:3.3.1", {\
+          "packageLocation": "./.yarn/__virtual__/react-loading-skeleton-virtual-afdde32787/0/cache/react-loading-skeleton-npm-3.3.1-b364092891-0de3437a5d.zip/node_modules/react-loading-skeleton/",\
+          "packageDependencies": [\
+            ["react-loading-skeleton", "virtual:5f7dd4d1eea4f62673df815ad4c9610fbbc12469e628cb0cf7998d43fbb0ab3e9b25d5dd5f7748afa6276159e9ca0f22c069b7a67b9c1be7e1add5e4d6f7fe4d#npm:3.3.1"],\
+            ["@types/react", "npm:18.2.6"],\
+            ["react", "npm:18.2.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/react",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["react-spinners", [\
+        ["npm:0.13.8", {\
+          "packageLocation": "./.yarn/cache/react-spinners-npm-0.13.8-bf54f5b324-cb58f916bb.zip/node_modules/react-spinners/",\
+          "packageDependencies": [\
+            ["react-spinners", "npm:0.13.8"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:5f7dd4d1eea4f62673df815ad4c9610fbbc12469e628cb0cf7998d43fbb0ab3e9b25d5dd5f7748afa6276159e9ca0f22c069b7a67b9c1be7e1add5e4d6f7fe4d#npm:0.13.8", {\
+          "packageLocation": "./.yarn/__virtual__/react-spinners-virtual-2367b79d24/0/cache/react-spinners-npm-0.13.8-bf54f5b324-cb58f916bb.zip/node_modules/react-spinners/",\
+          "packageDependencies": [\
+            ["react-spinners", "virtual:5f7dd4d1eea4f62673df815ad4c9610fbbc12469e628cb0cf7998d43fbb0ab3e9b25d5dd5f7748afa6276159e9ca0f22c069b7a67b9c1be7e1add5e4d6f7fe4d#npm:0.13.8"],\
+            ["@types/react", "npm:18.2.6"],\
+            ["@types/react-dom", "npm:18.2.4"],\
+            ["react", "npm:18.2.0"],\
+            ["react-dom", "virtual:5f7dd4d1eea4f62673df815ad4c9610fbbc12469e628cb0cf7998d43fbb0ab3e9b25d5dd5f7748afa6276159e9ca0f22c069b7a67b9c1be7e1add5e4d6f7fe4d#npm:18.2.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/react-dom",\
+            "@types/react",\
+            "react-dom",\
+            "react"\
           ],\
           "linkType": "HARD"\
         }]\

@@ -6,6 +6,8 @@ import axios from "axios";
 import { OpenAI } from "openai";
 import { BsFillArrowRightSquareFill } from "react-icons/bs";
 import { FaUserDoctor } from "react-icons/fa6";
+import PuffLoader from "react-spinners/PuffLoader";
+
 type ChatMessage = OpenAI.Chat.Completions.ChatCompletionMessageParam;
 
 const departments = [
@@ -51,6 +53,12 @@ const departments = [
   },
 ];
 
+const loaderCss: React.CSSProperties = {
+  position: "absolute",
+  top: 0,
+  right: 0,
+};
+
 export const AiForm = () => {
   const [department, setDepartment] = useState("Surgery");
   const [ans, setAns] = useState("");
@@ -80,7 +88,7 @@ export const AiForm = () => {
   };
   return (
     <div className="max-w-[768px] w-full">
-      <div className="flex justify-start items-center gap-3">
+      {/* <div className="flex justify-start items-center gap-3">
         <div>진료과를 선택해주세요</div>
         <Select
           onChange={(_, value) => setDepartment(value ?? "")}
@@ -107,7 +115,7 @@ export const AiForm = () => {
             </Option>
           ))}
         </Select>
-      </div>
+      </div> */}
       <div className="flex flex-col h-[70vh] py-4">
         {chats.map((chat, index) => (
           <div
@@ -129,6 +137,17 @@ export const AiForm = () => {
             >
               {chat.content}
             </div>
+            {disableInput && index === chats.length - 1 && (
+              <div>
+                <div className="flex items-center justify-start">
+                  <FaUserDoctor className="w-5 h-5 text-yellow-400 mr-2" />
+                  <span>{`${chats[0].content} 문진 도우미`}</span>
+                </div>
+                <div
+                  className={`rounded-lg p-2 my-1 w-[600px] bg-blue-300 text-left mr-auto`}
+                ></div>
+              </div>
+            )}
           </div>
         ))}
       </div>
@@ -140,15 +159,29 @@ export const AiForm = () => {
               className="border border-gray-400 rounded-lg outline-none px-4 py-2 w-full"
               onChange={(e) => setAns(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && request()}
-              placeholder="문진에 대한 답변을 입력해주세요."
+              placeholder={
+                disableInput
+                  ? "문진을 생성중입니다. 잠시 기다려주세요."
+                  : "문진에 대한 답변을 입력해주세요."
+              }
               disabled={disableInput}
             />
-            <BsFillArrowRightSquareFill
-              onClick={() => !disableInput && request}
-              className={`absolute top-0 right-0 w-8 h-8 pt-2 pr-2 cursor-pointer ${
-                ans === "" ? "text-gray-300" : "text-yellow-400"
-              }`}
-            />
+            {!disableInput && (
+              <BsFillArrowRightSquareFill
+                onClick={request}
+                className={`absolute top-0 right-0 w-8 h-8 pt-2 pr-2 cursor-pointer ${
+                  ans === "" ? "text-gray-300" : "text-yellow-400"
+                }`}
+              />
+            )}
+            {disableInput && (
+              <PuffLoader
+                loading={disableInput}
+                cssOverride={loaderCss}
+                size={40}
+                color="#FACC14"
+              />
+            )}
           </div>
         </div>
       </div>
