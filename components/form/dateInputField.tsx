@@ -1,7 +1,7 @@
 "use State";
 
-import { dateToYM } from "@/util/date-util";
-import { DateType } from "@/model/date";
+import { dateToYM } from "@/utils/date-util";
+import { DateType } from "@/models/date";
 import { useState } from "react";
 
 type Props = {
