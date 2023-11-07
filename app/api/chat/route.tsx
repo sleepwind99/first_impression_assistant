@@ -8,7 +8,7 @@ export const runtime = "edge";
 const apiConfig = new Configuration({ apiKey: process.env.APIKEY! });
 const openai = new OpenAIApi(apiConfig);
 
-export async function runFunction(name: string, args: any) {
+async function runFunction(name: string, args: any) {
   switch (name) {
     case "sendReport":
       return await sendReport(args);
