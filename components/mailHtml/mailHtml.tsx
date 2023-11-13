@@ -6,7 +6,10 @@ import { useRouter, useSearchParams } from "next/navigation";
 import pako from "pako";
 
 export const MailHtml = () => {
-  const data = JSON.parse(localStorage.getItem("report") ?? "{}");
+  let data: any;
+  if (typeof window !== "undefined") {
+    data = JSON.parse(localStorage.getItem("report") ?? "{}");
+  }
   const params = useSearchParams();
   const router = useRouter();
   const [email, setEmail] = useState("");
