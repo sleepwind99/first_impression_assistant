@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: { esmExternals: true }
+  experimental: { esmExternals: true },
 }
 
 module.exports = nextConfig
