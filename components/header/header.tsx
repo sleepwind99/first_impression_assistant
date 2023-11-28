@@ -1,12 +1,15 @@
-import HeaderLogo from '@/components/header/header-logo';
-import { AiOutlineMenu } from 'react-icons/ai';
+import HeaderLogo from "@/components/header/header-logo";
+import Image from "next/image";
+import Menu from "@/public/icons/menu.svg?url";
 
 export function Header() {
   return (
-    <header className="z-10 fixed w-screen bg-white top-0 h-16">
-      <div className="flex flex-row justify-between w-full px-9 items-center h-full border-b-[0.5px] border-black/70 gap-12">
-        <HeaderLogo />
-        <AiOutlineMenu className="w-8 h-8" />
+    <header className="z-10 fixed w-screen bg-white top-0 h-[70px] md:h-[100px]">
+      <div className="px-3 w-full md:px-9 h-full gap-12 shadow-sm">
+        <div className="flex flex-row justify-between w-full h-full max-w-[1400px] items-center mx-auto">
+          <HeaderLogo />
+          <Image src={Menu} alt="menu" className="h-6 w-6 md:h-11 md:w-11" />
+        </div>
       </div>
     </header>
   );

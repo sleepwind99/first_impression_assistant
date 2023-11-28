@@ -1,10 +1,5 @@
-import { SimpleModal } from "@/components/simpleModal/simpleModal";
-import { MailHtml } from "@/components/mailHtml/mailHtml";
+import { FirstAppointmentModal } from "@/components/modal/firstAppointmentModal";
 
 export default function Home() {
-  return (
-    <SimpleModal>
-      <MailHtml />
-    </SimpleModal>
-  );
+  return <FirstAppointmentModal />;
 }

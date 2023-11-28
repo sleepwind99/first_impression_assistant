@@ -10,11 +10,11 @@ const openai = new OpenAIApi(apiConfig);
 export async function POST(req: Request) {
   const { messages } = await req.json();
   const response = await openai.createChatCompletion({
-    model: "gpt-3.5-turbo-16k",
+    model: "gpt-3.5-turbo-1106",
     messages: [...preset, ...messages],
     temperature: 1,
     max_tokens: 1000,
-    top_p: 1,
+    top_p: 0,
     frequency_penalty: 0,
     presence_penalty: 0,
     stream: true,
