@@ -1,12 +1,15 @@
 "use client";
 import { FormEvent, useEffect, useRef, useState } from "react";
+import React from "react";
 import { useChat } from "ai/react";
-import { BsFillArrowRightSquareFill } from "react-icons/bs";
-import { FaUserDoctor } from "react-icons/fa6";
 import { useRouter } from "next/navigation";
 import PuffLoader from "react-spinners/PuffLoader";
 import { coverteReport } from "@/utils/coverte-report";
-import { Report } from "@/models/report";
+import Yonsei from "@/public/icons/yonsei.svg";
+import { CiUser } from "react-icons/ci";
+import Send from "@/public/icons/send.svg";
+import generateRandomId from "@/utils/idGenergator";
+import Robot from "@/public/icons/robot.svg";
 
 const loaderCss: React.CSSProperties = {
   position: "absolute",
@@ -24,18 +27,43 @@ export const AiForm = () => {
     setMessages,
   } = useChat();
   const formRef = useRef<HTMLFormElement>(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const chatbgRef = useRef<HTMLDivElement>(null);
   const [isResult, setIsResult] = useState(false);
-  const [report, setReport] = useState<Report>();
   const router = useRouter();
+
+  function resizeTextarea() {
+    if (!textareaRef.current) return;
+    textareaRef.current.style.height = "auto";
+    textareaRef.current.style.height = textareaRef.current.scrollHeight + "px";
+    if (textareaRef.current.scrollHeight > 200)
+      textareaRef.current.style.height = "208px";
+  }
+
+  function formatTime(date: Date) {
+    let hours: string | number = date.getHours();
+    let minutes: string | number = date.getMinutes();
+    hours = hours < 10 ? "0" + hours : hours;
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    return hours + ":" + minutes;
+  }
   useEffect(() => {
     setMessages([
       {
         role: "assistant",
         id: new Date().getTime().toString(),
         content: "어디가 불편해서 방문하신건가요?",
+        createdAt: new Date(),
       },
     ]);
   }, []);
+  useEffect(() => {
+    if (!chatbgRef.current) return;
+    if (chatbgRef.current.scrollHeight + 20 > chatbgRef.current.clientHeight) {
+      const { scrollHeight, clientHeight } = chatbgRef.current;
+      chatbgRef.current.scrollTop = scrollHeight - clientHeight;
+    }
+  }, [messages]);
   useEffect(() => {
     if (isLoading) return;
     const lastMessage = messages[messages.length - 1];
@@ -43,51 +71,70 @@ export const AiForm = () => {
     if (lastMessage.role !== "assistant") return;
     if (lastMessage.content.includes("# 결과 보고서 #")) {
       const rawReport = lastMessage.content.split("# 결과 보고서 #")[1];
-      const tempReport = coverteReport(rawReport);
-      setReport(tempReport);
+      localStorage.setItem("report", JSON.stringify(coverteReport(rawReport)));
       setIsResult(true);
-      localStorage.setItem("report", JSON.stringify(tempReport));
     }
   }, [isLoading]);
   return (
-    <div className="max-w-[768px] w-full">
-      <div className="flex flex-col h-[70vh] py-4">
-        {messages.map((chat, index) => (
+    <div className="max-w-[1400px] h-full w-full rounded-xl md:rounded-3xl bg-white mt-7 shadow-lg px-3 xl:px-auto mx-auto">
+      <div className="w-full h-full pt-2 pb-4 md:pt-4 md:pb-8 flex flex-col max-w-[1200px] mx-auto">
+        <div className="flex-1 overflow-hidden h-full px-3">
           <div
-            key={`${index}_${new Date().getTime()}`}
-            className={`${index === messages.length - 1 ? "pb-32" : ""}`}
+            ref={chatbgRef}
+            className="flex flex-col gap-4 py-4 h-full overflow-auto"
           >
-            {chat.role === "assistant" && (
-              <div className="flex items-center justify-start">
-                <FaUserDoctor className="w-5 h-5 text-yellow-400 mr-2" />
-                <span>AI 문진 도우미</span>
-              </div>
-            )}
-            <div
-              className={`rounded-lg p-2 my-1 w-fit max-w-[600px] ${
-                chat.role === "user"
-                  ? "bg-gray-400 text-left ml-auto"
-                  : "bg-blue-300 text-left mr-auto"
-              }`}
-            >
-              {chat.content}
+            <div className="fixed top-1/2 left-1/2 z-1 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+              <Yonsei />
             </div>
+            {messages.map((chat) => (
+              <div key={generateRandomId(15)} className={`flex items-start`}>
+                {chat.role === "assistant" && (
+                  <div className="flex items-center justify-center rounded-full bg-[#F2F6FA] w-9 h-9 md:w-[85px] md:h-[85px] z-[1] shadow-md">
+                    <Robot className="w-[22px] h-[17px] md:w-[52px] md:h-[42px]" />
+                  </div>
+                )}
+                <div className="flex items-end w-full">
+                  {chat.role === "user" && (
+                    <div className="text-xs md:text-xl font-[500] text-[#C0C0C0] ml-auto">
+                      {chat.createdAt && formatTime(chat.createdAt)}
+                    </div>
+                  )}
+                  <div
+                    className={`rounded-xl md:rounded-3xl px-4 py-3 md:px-7 md:py-4 shadow-lg w-fit max-w-[600px] whitespace-pre-line z-[1] text-xs md:text-xl text-left mx-2 md:mx-5 font-[600] ${
+                      chat.role === "user"
+                        ? "bg-[#EEF7FF] text-[#333]"
+                        : "bg-[#00387F] text-white"
+                    }`}
+                  >
+                    {chat.content}
+                  </div>
+                  {chat.role === "assistant" && (
+                    <div className="text-xs md:text-xl font-[500] text-[#C0C0C0]">
+                      {chat.createdAt && formatTime(chat.createdAt)}
+                    </div>
+                  )}
+                </div>
+                {chat.role === "user" && (
+                  <div className="flex items-center justify-center rounded-full bg-[#D9D9D9] w-9 h-9 md:w-[85px] md:h-[85px] z-[1] shadow-md">
+                    <CiUser className="w-6 h-6 md:w-10 md:h-10" />
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-      <div className="fixed bottom-0 left-0 flex items-center w-full justify-center pb-10 bg-white">
-        <div className="max-w-[768px] w-full flex mt-5 mx-2">
+        </div>
+        <div className="w-full px-1 md:px-10">
           {isResult ? (
-            <div className="flex gap-2 w-full">
+            <div className="w-full flex items-center flex-row gap-2 md:gap-4">
               <div
-                onClick={() => router.refresh()}
-                className="px-auto w-full py-2 rounded-lg bg-yellow-400 text-white cursor-pointer text-center"
+                onClick={() => router.replace("/")}
+                className="rounded-lg md:rounded-xl cursor-pointer text-center w-full font-[400] text-xs md:text-2xl shadow-md py-4 bg-[#D9D9D9]"
               >
                 새로 고침
               </div>
               <div
                 onClick={() => router.push("/result")}
-                className="px-auto w-full py-2 rounded-lg border border-yellow-400 text-yellow-400 cursor-pointer text-center"
+                className="bg-[#00387F] rounded-lg md:rounded-xl text-xs font-[400] md:text-2xl cursor-pointer shadow-md py-4 text-white text-center w-full"
               >
                 결과 보기
               </div>
@@ -98,24 +145,34 @@ export const AiForm = () => {
               onSubmit={(e) => !isLoading && handleSubmit(e)}
               ref={formRef}
             >
-              <input
+              <textarea
+                ref={textareaRef}
                 value={input}
-                className="border border-gray-400 rounded-lg outline-none px-4 py-2 w-full"
-                onChange={handleInputChange}
+                className="w-full text-xs md:text-2xl font-[400] rounded-xl shadow-md pl-3 pr-8 py-4 md:pl-7 md:pr-16 md:py-6 outline-none row-auto resize-none"
+                rows={1}
+                onChange={(e) => {
+                  if (e.target.value[e.target.value.length - 1] === "\n")
+                    return;
+                  handleInputChange(e);
+                  resizeTextarea();
+                }}
                 placeholder={
                   isLoading
                     ? "문진을 생성중입니다. 잠시 기다려주세요."
                     : "문진에 대한 답변을 입력해주세요."
                 }
+                onKeyDown={(e) =>
+                  e.key === "Enter" &&
+                  !isLoading &&
+                  formRef.current?.requestSubmit()
+                }
               />
               {!isLoading && (
-                <BsFillArrowRightSquareFill
+                <Send
                   onClick={(e: FormEvent) =>
                     handleSubmit(e as FormEvent<HTMLFormElement>)
                   }
-                  className={`absolute top-0 right-0 w-8 h-8 pt-2 pr-2 cursor-pointer ${
-                    input === "" ? "text-gray-300" : "text-yellow-400"
-                  }`}
+                  className="absolute right-3 md:right-5 bottom-[22px] md:bottom-7 cursor-pointer w-4 h-4 md:w-10 md:h-10"
                 />
               )}
               {isLoading && (
@@ -129,6 +186,9 @@ export const AiForm = () => {
             </form>
           )}
         </div>
+      </div>
+      <div className="z-1 w-full text-xs md:text-xl text-[#777] font-[300] text-center mt-4">
+        ※정확한 진단은 내방하셔서 의사의 처방을 받으시길 바랍니다.
       </div>
     </div>
   );

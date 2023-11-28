@@ -1,10 +1,8 @@
 "use client";
-
 import TextInputField from "@/components/form/textInputField";
 import { useState } from "react";
-import Image from "next/image";
-import checkIcon from "@/public/icons/check.svg";
-import closeIcon from "@/public/icons/close.svg";
+import CheckIcon from "@/public/icons/check.svg";
+import CloseIcon from "@/public/icons/close.svg";
 
 export type UsernameFormProps = {
   email: string;
@@ -86,15 +84,8 @@ const UsernameForm = ({
         pattern={regExp.source}
         prefix={
           <>
-            {(!isEnable || isValidate) && (
-              <Image
-                src={isEnable ? checkIcon : closeIcon}
-                className={isEnable ? "fill-green" : "fill-red"}
-                alt={isEnable ? "사용 가능" : "사용 불가능"}
-                width={24}
-                height={24}
-              />
-            )}
+            {(!isEnable || isValidate) &&
+              (isEnable ? <CheckIcon /> : <CloseIcon />)}
           </>
         }
         suffix={

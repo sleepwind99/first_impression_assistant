@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import close from "@/public/icons/close.svg";
+import Close from "@/public/icons/close.svg";
 
 type TagProps = {
   title: string;
@@ -24,14 +24,18 @@ const Tag = ({
           {title}
         </div>
         {isDelete && (
-          <Image
-            src={close}
-            alt="Close"
-            width={12}
-            height={12}
-            className="absolute top-1/2 left-[8px] transform -translate-y-1/2 cursor-pointer"
+          <Close
             onClick={handleDelete}
+            className="absolute top-1/2 left-[8px] transform -translate-y-1/2 cursor-pointer"
           />
+          // <Image
+          //   src={close}
+          //   alt="Close"
+          //   width={12}
+          //   height={12}
+          //   className="absolute top-1/2 left-[8px] transform -translate-y-1/2 cursor-pointer"
+          //   onClick={handleDelete}
+          // />
         )}
       </div>
     </>
