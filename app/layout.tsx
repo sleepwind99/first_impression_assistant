@@ -25,7 +25,7 @@ export default function RootLayout({ children, modal }: RootLayoutProps) {
       <head>
         <link rel="icon" href="/favicon.ico" />
       </head>
-      <body className="h-[100vh]">
+      <body className="h-screen">
         <Provider>
           <Header />
           {children}

@@ -11,20 +11,21 @@ type MailHtmlProps = {
 
 export const MailHtml = ({ setShare }: MailHtmlProps) => {
   const [data, setData] = useState<Report>();
-  // const [isLoading, setIsLoading] = useState(false);
   const params = useSearchParams();
   const router = useRouter();
-  // const [email, setEmail] = useState("");
+
+  // 최초 렌더링 시 query string에 report가 없으면 localStorage에서 가져온다.
   useEffect(() => {
     const reportFromQuery = params.get("report");
     if (!reportFromQuery) {
       const report = JSON.parse(localStorage.getItem("report") ?? "{}");
       if (Object.entries(report).length === 0) {
-        alert("보고서가 없습니다.");
+        alert("결과 보고서가 없습니다.");
         router.push("/");
         return;
       }
       setData(report);
+      // 결과 보고서를 공유할 수 있도록 encode하여 url을 생성한다.
       const jsonString = JSON.stringify(report);
       const compressed = pako.deflate(jsonString);
       const base64Encoded = Buffer.from(compressed).toString("base64");
@@ -38,39 +39,16 @@ export const MailHtml = ({ setShare }: MailHtmlProps) => {
         });
       return;
     }
+    // query string에 report가 있으면 decode하여 localStorage에 저장하고
+    // /shared-result로 이동한다.
     const urlSafeDecoded = decodeURIComponent(reportFromQuery);
     const decodedCompressed = Buffer.from(urlSafeDecoded, "base64");
     const inflated = pako.inflate(decodedCompressed, { to: "string" });
     localStorage.removeItem("report");
     localStorage.setItem("report", inflated);
-    router.push("/result");
+    router.push("/shared-result");
   }, []);
-  // const sendMail = async () => {
-  //   setIsLoading(true);
-  //   try {
-  //     const jsonString = JSON.stringify(data);
-  //     const compressed = pako.deflate(jsonString);
-  //     const base64Encoded = Buffer.from(compressed).toString("base64");
-  //     const urlSafeEncoded = encodeURIComponent(base64Encoded);
-  //     const url = `${new URL(window.location.href)}?report=${urlSafeEncoded}`;
-  //     await fetch("/api/sendmail", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({
-  //         htmlstr: `<a href="${url}">환자정보 바로가기</a>`,
-  //         sendTo: email,
-  //       }),
-  //     });
-  //     setEmail("");
-  //     alert("메일을 성공적으로 보냈습니다.");
-  //   } catch (e) {
-  //     console.error(e);
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
-  // };
+
   return (
     <div className="w-full md:w-[1200px]">
       {data && <NewTable data={data} />}
@@ -78,6 +56,7 @@ export const MailHtml = ({ setShare }: MailHtmlProps) => {
   );
 };
 
+// 환자의 정보를 테이블로 보여주는 컴포넌트
 const NewTable = ({ data }: { data: Report }) => {
   return (
     <div className="p-4 md:p-12">
@@ -175,6 +154,7 @@ type TableElProps = {
   valueClass?: string;
 };
 
+// 각 테이블의 엘리먼트
 const TalbeEl = ({
   label,
   value,
