@@ -5,17 +5,12 @@ import { useChat } from "ai/react";
 import { useRouter } from "next/navigation";
 import PuffLoader from "react-spinners/PuffLoader";
 import { coverteReport } from "@/utils/coverte-report";
-import Yonsei from "@/public/icons/yonsei.svg";
+import Yonsei from "@/public/icons/Yonsei.svg?url";
+import Image from "next/image";
 import { CiUser } from "react-icons/ci";
-import Send from "@/public/icons/send.svg";
+import Send from "@/public/icons/send.svg?url";
 import generateRandomId from "@/utils/idGenergator";
-import Robot from "@/public/icons/robot.svg";
-
-const loaderCss: React.CSSProperties = {
-  position: "absolute",
-  top: 0,
-  right: 0,
-};
+import Robot from "@/public/svgs/Robot";
 
 export const AiForm = () => {
   const {
@@ -78,13 +73,13 @@ export const AiForm = () => {
   return (
     <div className="max-w-[1400px] h-full w-full rounded-xl md:rounded-3xl bg-white mt-7 shadow-lg px-3 xl:px-auto mx-auto">
       <div className="w-full h-full pt-2 pb-4 md:pt-4 md:pb-8 flex flex-col max-w-[1200px] mx-auto">
-        <div className="flex-1 overflow-hidden h-full px-3">
+        <div className="flex-1 overflow-hidden px-3">
           <div
             ref={chatbgRef}
-            className="flex flex-col gap-4 py-4 h-full overflow-auto"
+            className="flex flex-col gap-4 py-4 overflow-auto h-full"
           >
             <div className="fixed top-1/2 left-1/2 z-1 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
-              <Yonsei />
+              <Image src={Yonsei} alt="yonsei" />
             </div>
             {messages.map((chat) => (
               <div key={generateRandomId(15)} className={`flex items-start`}>
@@ -168,7 +163,10 @@ export const AiForm = () => {
                 }
               />
               {!isLoading && (
-                <Send
+                <Image
+                  src={Send}
+                  alt="send"
+                  loading="eager"
                   onClick={(e: FormEvent) =>
                     handleSubmit(e as FormEvent<HTMLFormElement>)
                   }
@@ -176,12 +174,9 @@ export const AiForm = () => {
                 />
               )}
               {isLoading && (
-                <PuffLoader
-                  loading={isLoading}
-                  cssOverride={loaderCss}
-                  size={40}
-                  color="#FACC14"
-                />
+                <div className="absolute w-8 h-8 right-3 bottom-4 md:right-5 md:bottom-6 md:w-12 md:h-12">
+                  <PuffLoader loading={isLoading} size="100%" color="#9F9F9F" />
+                </div>
               )}
             </form>
           )}

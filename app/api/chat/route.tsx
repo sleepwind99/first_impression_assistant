@@ -1,6 +1,6 @@
 import { Configuration, OpenAIApi } from "openai-edge";
 import { OpenAIStream, StreamingTextResponse } from "ai";
-import { preset } from "@/prompts/gtp-propmt";
+import { preset } from "@/prompts/gtp-prompt";
 
 export const runtime = "edge";
 
@@ -10,7 +10,7 @@ const openai = new OpenAIApi(apiConfig);
 export async function POST(req: Request) {
   const { messages } = await req.json();
   const response = await openai.createChatCompletion({
-    model: "gpt-3.5-turbo-1106",
+    model: "gpt-4-1106-preview",
     messages: [...preset, ...messages],
     temperature: 1,
     max_tokens: 1000,
