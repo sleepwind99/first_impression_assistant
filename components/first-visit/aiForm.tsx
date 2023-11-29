@@ -5,7 +5,7 @@ import { useChat } from "ai/react";
 import { useRouter } from "next/navigation";
 import PuffLoader from "react-spinners/PuffLoader";
 import { coverteReport } from "@/utils/coverte-report";
-import Yonsei from "@/public/icons/Yonsei.svg?url";
+import Yonsei from "@/public/icons/yonsei.svg?url";
 import Image from "next/image";
 import { CiUser } from "react-icons/ci";
 import Send from "@/public/icons/send.svg?url";
