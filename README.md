@@ -2,7 +2,7 @@
 
 ai가 환자의 초진을 하고, 내용을 정리하여 emr형식으로 보여줌.
 
-#### <a href="https://versel-next-portfolio.vercel.app">🌐 바로 가기</a>
+#### <a href="https://first-impression-assistant.vercel.app">🌐 바로 가기</a>
 
 ## 🖼️ 완성 이미지
 <img width="1280" alt="image" src="https://github.com/sleepwind99/first_impression_assistant/blob/main/public/images/%EB%A9%94%EC%9D%B8%20%ED%8E%98%EC%9D%B4%EC%A7%80.png?raw=true">
