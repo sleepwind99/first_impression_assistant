@@ -14,7 +14,7 @@ const HeaderLogo = () => {
           alt="logo"
           className="w-[132px] h-[23px] md:w-[213px] md:h-[37px]"
         />
-        <h1 className="text-base md:text-2xl font-[600] text-[#767575]">
+        <h1 className="text-base md:text-2xl font-[600] xl:font-[500] text-[#767575]">
           채팅 AI초진시스템
         </h1>
       </div>

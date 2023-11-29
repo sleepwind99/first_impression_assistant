@@ -86,7 +86,7 @@ export const AiForm = () => {
         <div className="flex-1 overflow-hidden px-3">
           <div
             ref={chatbgRef}
-            className="flex flex-col gap-4 py-4 overflow-auto min-h-[500px] h-[68vh] md:h-[58vh] md:min-h-[300px]"
+            className="flex flex-col gap-4 py-4 overflow-auto h-full"
           >
             {/* 배경 로고 */}
             <div className="fixed top-1/2 left-1/2 z-1 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
@@ -104,7 +104,7 @@ export const AiForm = () => {
                   {chat.role === "assistant" && (
                     <p className="text-xs md:text-xl ml-5 mb-2">
                       대장항문외과{" "}
-                      <span className=" font-bold">한윤대교수님</span>{" "}
+                      <span className="font-[600]">한윤대교수님</span>{" "}
                       AI초진도우미
                     </p>
                   )}
@@ -115,7 +115,7 @@ export const AiForm = () => {
                       </div>
                     )}
                     <div
-                      className={`rounded-xl md:rounded-3xl px-4 py-3 md:px-7 md:py-4 shadow-lg w-fit max-w-[600px] whitespace-pre-line z-[1] text-xs md:text-xl text-left mx-2 md:mx-5 font-[600] ${
+                      className={`rounded-xl md:rounded-3xl px-4 py-3 md:px-7 md:py-4 shadow-lg w-fit max-w-[600px] whitespace-pre-line z-[1] text-xs md:text-xl text-left mx-2 md:mx-5 font-[600] xl:font-[500] ${
                         chat.role === "user"
                           ? "bg-[#EEF7FF] text-[#333]"
                           : "bg-[#00387F] text-white"
@@ -204,9 +204,6 @@ export const AiForm = () => {
             </form>
           )}
         </div>
-      </div>
-      <div className="z-1 w-full text-xs md:text-xl text-[#777] font-[300] text-center mt-4">
-        ※정확한 진단은 내방하셔서 의사의 처방을 받으시길 바랍니다.
       </div>
     </div>
   );
