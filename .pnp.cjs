@@ -30,6 +30,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["@mui/base", "virtual:5f7dd4d1eea4f62673df815ad4c9610fbbc12469e628cb0cf7998d43fbb0ab3e9b25d5dd5f7748afa6276159e9ca0f22c069b7a67b9c1be7e1add5e4d6f7fe4d#npm:5.0.0-beta.18"],\
             ["@react-email/render", "npm:0.0.9"],\
+            ["@svgr/cli", "npm:8.1.0"],\
             ["@svgr/webpack", "npm:8.1.0"],\
             ["@types/node", "npm:20.2.1"],\
             ["@types/nodemailer", "npm:6.4.14"],\
@@ -3409,6 +3410,25 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["@svgr/cli", [\
+        ["npm:8.1.0", {\
+          "packageLocation": "./.yarn/cache/@svgr-cli-npm-8.1.0-f6fc21e119-43c73c9a6e.zip/node_modules/@svgr/cli/",\
+          "packageDependencies": [\
+            ["@svgr/cli", "npm:8.1.0"],\
+            ["@svgr/core", "npm:8.1.0"],\
+            ["@svgr/plugin-jsx", "virtual:f6fc21e1196a5e36ccf7110701b6043e0b913ea4ae1d1deb9368d1ebef4cb8924deb4e8e07aafc9678d844b070003814a4413e37134a210b07db139914fa76a4#npm:8.1.0"],\
+            ["@svgr/plugin-prettier", "virtual:f6fc21e1196a5e36ccf7110701b6043e0b913ea4ae1d1deb9368d1ebef4cb8924deb4e8e07aafc9678d844b070003814a4413e37134a210b07db139914fa76a4#npm:8.1.0"],\
+            ["@svgr/plugin-svgo", "virtual:f6fc21e1196a5e36ccf7110701b6043e0b913ea4ae1d1deb9368d1ebef4cb8924deb4e8e07aafc9678d844b070003814a4413e37134a210b07db139914fa76a4#npm:8.1.0"],\
+            ["camelcase", "npm:6.3.0"],\
+            ["chalk", "npm:4.1.2"],\
+            ["commander", "npm:9.5.0"],\
+            ["dashify", "npm:2.0.0"],\
+            ["glob", "npm:8.1.0"],\
+            ["snake-case", "npm:3.0.4"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["@svgr/core", [\
         ["npm:8.1.0", {\
           "packageLocation": "./.yarn/cache/@svgr-core-npm-8.1.0-77cc138b8f-da4a12865c.zip/node_modules/@svgr/core/",\
@@ -3442,16 +3462,40 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:53837c94fe0f74fafc75833122c429cfaa547fd5fc7a6d940cac3b691a98f8d8c1a980b7cdd8cd9afbd5a152244f09ae2b693859798df1e2ad67d70e49a9f4d3#npm:8.1.0", {\
-          "packageLocation": "./.yarn/__virtual__/@svgr-plugin-jsx-virtual-f236f0fc9a/0/cache/@svgr-plugin-jsx-npm-8.1.0-e2710753df-0418a97807.zip/node_modules/@svgr/plugin-jsx/",\
+        ["virtual:f6fc21e1196a5e36ccf7110701b6043e0b913ea4ae1d1deb9368d1ebef4cb8924deb4e8e07aafc9678d844b070003814a4413e37134a210b07db139914fa76a4#npm:8.1.0", {\
+          "packageLocation": "./.yarn/__virtual__/@svgr-plugin-jsx-virtual-029e03eb9c/0/cache/@svgr-plugin-jsx-npm-8.1.0-e2710753df-0418a97807.zip/node_modules/@svgr/plugin-jsx/",\
           "packageDependencies": [\
-            ["@svgr/plugin-jsx", "virtual:53837c94fe0f74fafc75833122c429cfaa547fd5fc7a6d940cac3b691a98f8d8c1a980b7cdd8cd9afbd5a152244f09ae2b693859798df1e2ad67d70e49a9f4d3#npm:8.1.0"],\
+            ["@svgr/plugin-jsx", "virtual:f6fc21e1196a5e36ccf7110701b6043e0b913ea4ae1d1deb9368d1ebef4cb8924deb4e8e07aafc9678d844b070003814a4413e37134a210b07db139914fa76a4#npm:8.1.0"],\
             ["@babel/core", "npm:7.23.3"],\
             ["@svgr/babel-preset", "virtual:77cc138b8f03e76bc81b53d7c536b91810383e8b8e9f294aac9f969daaf6fd5a72e29c2099e3025b537aac701c45d44c7e6af1647a2799c9f61d4f4f9312b7a3#npm:8.1.0"],\
             ["@svgr/core", "npm:8.1.0"],\
             ["@svgr/hast-util-to-babel-ast", "npm:8.0.0"],\
             ["@types/svgr__core", null],\
             ["svg-parser", "npm:2.0.4"]\
+          ],\
+          "packagePeers": [\
+            "@svgr/core",\
+            "@types/svgr__core"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@svgr/plugin-prettier", [\
+        ["npm:8.1.0", {\
+          "packageLocation": "./.yarn/cache/@svgr-plugin-prettier-npm-8.1.0-4a94d8f1d5-660bbfe63a.zip/node_modules/@svgr/plugin-prettier/",\
+          "packageDependencies": [\
+            ["@svgr/plugin-prettier", "npm:8.1.0"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:f6fc21e1196a5e36ccf7110701b6043e0b913ea4ae1d1deb9368d1ebef4cb8924deb4e8e07aafc9678d844b070003814a4413e37134a210b07db139914fa76a4#npm:8.1.0", {\
+          "packageLocation": "./.yarn/__virtual__/@svgr-plugin-prettier-virtual-9bccb516e9/0/cache/@svgr-plugin-prettier-npm-8.1.0-4a94d8f1d5-660bbfe63a.zip/node_modules/@svgr/plugin-prettier/",\
+          "packageDependencies": [\
+            ["@svgr/plugin-prettier", "virtual:f6fc21e1196a5e36ccf7110701b6043e0b913ea4ae1d1deb9368d1ebef4cb8924deb4e8e07aafc9678d844b070003814a4413e37134a210b07db139914fa76a4#npm:8.1.0"],\
+            ["@svgr/core", "npm:8.1.0"],\
+            ["@types/svgr__core", null],\
+            ["deepmerge", "npm:4.3.1"],\
+            ["prettier", "npm:2.8.8"]\
           ],\
           "packagePeers": [\
             "@svgr/core",\
@@ -3468,10 +3512,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:53837c94fe0f74fafc75833122c429cfaa547fd5fc7a6d940cac3b691a98f8d8c1a980b7cdd8cd9afbd5a152244f09ae2b693859798df1e2ad67d70e49a9f4d3#npm:8.1.0", {\
-          "packageLocation": "./.yarn/__virtual__/@svgr-plugin-svgo-virtual-6f131100c2/0/cache/@svgr-plugin-svgo-npm-8.1.0-d1dfe32f26-59d9d214ce.zip/node_modules/@svgr/plugin-svgo/",\
+        ["virtual:f6fc21e1196a5e36ccf7110701b6043e0b913ea4ae1d1deb9368d1ebef4cb8924deb4e8e07aafc9678d844b070003814a4413e37134a210b07db139914fa76a4#npm:8.1.0", {\
+          "packageLocation": "./.yarn/__virtual__/@svgr-plugin-svgo-virtual-cd2f6fdd60/0/cache/@svgr-plugin-svgo-npm-8.1.0-d1dfe32f26-59d9d214ce.zip/node_modules/@svgr/plugin-svgo/",\
           "packageDependencies": [\
-            ["@svgr/plugin-svgo", "virtual:53837c94fe0f74fafc75833122c429cfaa547fd5fc7a6d940cac3b691a98f8d8c1a980b7cdd8cd9afbd5a152244f09ae2b693859798df1e2ad67d70e49a9f4d3#npm:8.1.0"],\
+            ["@svgr/plugin-svgo", "virtual:f6fc21e1196a5e36ccf7110701b6043e0b913ea4ae1d1deb9368d1ebef4cb8924deb4e8e07aafc9678d844b070003814a4413e37134a210b07db139914fa76a4#npm:8.1.0"],\
             ["@svgr/core", "npm:8.1.0"],\
             ["@types/svgr__core", null],\
             ["cosmiconfig", "virtual:77cc138b8f03e76bc81b53d7c536b91810383e8b8e9f294aac9f969daaf6fd5a72e29c2099e3025b537aac701c45d44c7e6af1647a2799c9f61d4f4f9312b7a3#npm:8.3.6"],\
@@ -3496,8 +3540,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@babel/preset-react", "virtual:53837c94fe0f74fafc75833122c429cfaa547fd5fc7a6d940cac3b691a98f8d8c1a980b7cdd8cd9afbd5a152244f09ae2b693859798df1e2ad67d70e49a9f4d3#npm:7.23.3"],\
             ["@babel/preset-typescript", "virtual:53837c94fe0f74fafc75833122c429cfaa547fd5fc7a6d940cac3b691a98f8d8c1a980b7cdd8cd9afbd5a152244f09ae2b693859798df1e2ad67d70e49a9f4d3#npm:7.23.3"],\
             ["@svgr/core", "npm:8.1.0"],\
-            ["@svgr/plugin-jsx", "virtual:53837c94fe0f74fafc75833122c429cfaa547fd5fc7a6d940cac3b691a98f8d8c1a980b7cdd8cd9afbd5a152244f09ae2b693859798df1e2ad67d70e49a9f4d3#npm:8.1.0"],\
-            ["@svgr/plugin-svgo", "virtual:53837c94fe0f74fafc75833122c429cfaa547fd5fc7a6d940cac3b691a98f8d8c1a980b7cdd8cd9afbd5a152244f09ae2b693859798df1e2ad67d70e49a9f4d3#npm:8.1.0"]\
+            ["@svgr/plugin-jsx", "virtual:f6fc21e1196a5e36ccf7110701b6043e0b913ea4ae1d1deb9368d1ebef4cb8924deb4e8e07aafc9678d844b070003814a4413e37134a210b07db139914fa76a4#npm:8.1.0"],\
+            ["@svgr/plugin-svgo", "virtual:f6fc21e1196a5e36ccf7110701b6043e0b913ea4ae1d1deb9368d1ebef4cb8924deb4e8e07aafc9678d844b070003814a4413e37134a210b07db139914fa76a4#npm:8.1.0"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -4589,6 +4633,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["commander", "npm:7.2.0"]\
           ],\
           "linkType": "HARD"\
+        }],\
+        ["npm:9.5.0", {\
+          "packageLocation": "./.yarn/cache/commander-npm-9.5.0-993b3f2434-c7a3e27aa5.zip/node_modules/commander/",\
+          "packageDependencies": [\
+            ["commander", "npm:9.5.0"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["concat-map", [\
@@ -4792,6 +4843,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/damerau-levenshtein-npm-1.0.8-bda7311c69-d240b77575.zip/node_modules/damerau-levenshtein/",\
           "packageDependencies": [\
             ["damerau-levenshtein", "npm:1.0.8"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["dashify", [\
+        ["npm:2.0.0", {\
+          "packageLocation": "./.yarn/cache/dashify-npm-2.0.0-7c0a7ccfd6-f13233f38f.zip/node_modules/dashify/",\
+          "packageDependencies": [\
+            ["dashify", "npm:2.0.0"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -5169,6 +5229,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["emr_ai", "workspace:."],\
             ["@mui/base", "virtual:5f7dd4d1eea4f62673df815ad4c9610fbbc12469e628cb0cf7998d43fbb0ab3e9b25d5dd5f7748afa6276159e9ca0f22c069b7a67b9c1be7e1add5e4d6f7fe4d#npm:5.0.0-beta.18"],\
             ["@react-email/render", "npm:0.0.9"],\
+            ["@svgr/cli", "npm:8.1.0"],\
             ["@svgr/webpack", "npm:8.1.0"],\
             ["@types/node", "npm:20.2.1"],\
             ["@types/nodemailer", "npm:6.4.14"],\

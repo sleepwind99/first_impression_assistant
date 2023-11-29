@@ -77,9 +77,9 @@ export function FirstAppointmentModal() {
             >
               공유
             </button>
-            <button className="bg-white text-xs py-2 px-3 md:py-3 md:px-6 rounded-lg md:rounded-xl md:text-xl mr-4 md:mr-8">
+            {/* <button className="bg-white text-xs py-2 px-3 md:py-3 md:px-6 rounded-lg md:rounded-xl md:text-xl mr-4 md:mr-8">
               전문의에 문의
-            </button>
+            </button> */}
             <Image
               ref={closeRef}
               onClick={(e) => {
@@ -92,7 +92,7 @@ export function FirstAppointmentModal() {
             />
           </div>
         </div>
-        <p className="bg-[#EAF1F8] text-xs md:text-xl px-5 py-3 text-center text-[#777]">
+        <p className="bg-[#EAF1F8] text-xs md:text-xl px-5 py-3 text-center text-[#777] tracking-[-0.8px]">
           연세대학교 의료원의 채팅AI 초진시스템이 환자의 답변을 토대로 추론한
           초진보고서입니다. 정확한 진단은 반드시 전문의의 처방을 따르시기
           바랍니다.

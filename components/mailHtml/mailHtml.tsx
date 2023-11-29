@@ -11,10 +11,10 @@ type MailHtmlProps = {
 
 export const MailHtml = ({ setShare }: MailHtmlProps) => {
   const [data, setData] = useState<Report>();
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
   const params = useSearchParams();
   const router = useRouter();
-  const [email, setEmail] = useState("");
+  // const [email, setEmail] = useState("");
   useEffect(() => {
     const reportFromQuery = params.get("report");
     if (!reportFromQuery) {
@@ -43,35 +43,34 @@ export const MailHtml = ({ setShare }: MailHtmlProps) => {
     const inflated = pako.inflate(decodedCompressed, { to: "string" });
     localStorage.removeItem("report");
     localStorage.setItem("report", inflated);
-    router.push("/report");
+    router.push("/result");
   }, []);
-  const sendMail = async () => {
-    setIsLoading(true);
-    try {
-      const jsonString = JSON.stringify(data);
-      const compressed = pako.deflate(jsonString);
-      const base64Encoded = Buffer.from(compressed).toString("base64");
-      const urlSafeEncoded = encodeURIComponent(base64Encoded);
-      const url = `${new URL(window.location.href)}?report=${urlSafeEncoded}`;
-      await fetch("/api/sendmail", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          // htmlstr: renderToString(<Html data={data} />),
-          htmlstr: `<a href="${url}">환자정보 바로가기</a>`,
-          sendTo: email,
-        }),
-      });
-      setEmail("");
-      alert("메일을 성공적으로 보냈습니다.");
-    } catch (e) {
-      console.error(e);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  // const sendMail = async () => {
+  //   setIsLoading(true);
+  //   try {
+  //     const jsonString = JSON.stringify(data);
+  //     const compressed = pako.deflate(jsonString);
+  //     const base64Encoded = Buffer.from(compressed).toString("base64");
+  //     const urlSafeEncoded = encodeURIComponent(base64Encoded);
+  //     const url = `${new URL(window.location.href)}?report=${urlSafeEncoded}`;
+  //     await fetch("/api/sendmail", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         htmlstr: `<a href="${url}">환자정보 바로가기</a>`,
+  //         sendTo: email,
+  //       }),
+  //     });
+  //     setEmail("");
+  //     alert("메일을 성공적으로 보냈습니다.");
+  //   } catch (e) {
+  //     console.error(e);
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
   return (
     <div className="w-full md:w-[1200px]">
       {data && <NewTable data={data} />}
