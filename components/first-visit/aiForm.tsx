@@ -2,7 +2,7 @@
 import { FormEvent, useEffect, useRef, useState } from "react";
 import React from "react";
 import { useChat } from "ai/react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import PuffLoader from "react-spinners/PuffLoader";
 import { coverteReport } from "@/utils/coverte-report";
 import Yonsei from "@/public/icons/yonsei.svg?url";
@@ -11,6 +11,7 @@ import { CiUser } from "react-icons/ci";
 import Send from "@/public/icons/send.svg?url";
 import generateRandomId from "@/utils/idGenergator";
 import Robot from "@/public/svgs/Robot";
+import { Lang } from "@/lang/lang";
 
 // AI와 대화할 수 있는 form
 export const AiForm = () => {
@@ -23,11 +24,13 @@ export const AiForm = () => {
     isLoading, // 서버로 전송하는 중인지 여부
     setMessages, // 대화 내용/기록을 업데이트하는 함수
   } = useChat();
+  const param = useSearchParams();
   const formRef = useRef<HTMLFormElement>(null); // form element
   const textareaRef = useRef<HTMLTextAreaElement>(null); // textarea element
   const chatbgRef = useRef<HTMLDivElement>(null); // 대화 내용/기록을 감싸는 div element
   const [isResult, setIsResult] = useState(false); // 결과 보고서를 받았는지 여부
   const [isAutoScroll, setIsAutoScroll] = useState(true); // 대화 내용/기록이 업데이트 될 때마다 자동으로 스크롤을 내릴지 여부
+  const [lang, setLang] = useState<keyof typeof Lang>("ko"); // 언어 설정
   const router = useRouter();
 
   // textarea의 높이를 자동으로 조절하는 함수
@@ -50,11 +53,13 @@ export const AiForm = () => {
 
   // 최초 렌더링 시 대화 내용/기록에 "어디가 불편해서 방문하신건가요?"를 추가
   useEffect(() => {
+    const tempLang = (param.get("lang") as keyof typeof Lang) ?? "ko";
+    setLang(tempLang);
     setMessages([
       {
         role: "assistant",
         id: new Date().getTime().toString(),
-        content: "어디가 불편해서 방문하신건가요?",
+        content: Lang[tempLang].firstQuestion,
         createdAt: new Date(),
       },
     ]);
@@ -89,14 +94,14 @@ export const AiForm = () => {
   }, [isLoading]);
   return (
     <div className="flex flex-col w-full h-full">
-      <p className="z-1 w-full mt-5 text-xs md:text-base md:leading-5 text-[#777] font-[300] text-center md:mt-4">
+      {/* <p className="z-1 w-full mt-5 text-xs md:text-base md:leading-5 text-[#777] font-[300] text-center md:mt-4">
         {`성명에는 가명(김모씨 등)을 써도 괜찮습니다. `}
         <br />
         {`통증 정도는 0(약)부터 10(강)까지로 기입해 주시기 바랍니다.`}
         <br />
         {`날짜, 위치, 갯수 등의 정보는 숫자로 표현해주시기 바랍니다. `}
-      </p>
-      <div className="max-w-[1400px] flex-1 overflow-hidden w-full rounded-xl md:rounded-3xl bg-white mt-2 md:mt-3 shadow-lg px-3 xl:px-auto mx-auto">
+      </p> */}
+      <div className="max-w-[1400px] flex-1 overflow-hidden w-full rounded-xl md:rounded-3xl bg-white mt-2 pt-4 md:mt-3 shadow-lg px-3 xl:px-auto mx-auto">
         <div className="w-full h-full pt-2 pb-4 md:pt-4 md:pb-8 flex flex-col max-w-[1200px] mx-auto">
           <div className="flex-1 overflow-hidden px-3">
             <div
@@ -119,9 +124,7 @@ export const AiForm = () => {
                   <div className="w-full">
                     {chat.role === "assistant" && (
                       <p className="text-xs md:text-xl ml-5 mb-2">
-                        대장항문외과{" "}
-                        <span className="font-[600]">한윤대교수님</span>{" "}
-                        AI초진도우미
+                        {Lang[lang].assistant}
                       </p>
                     )}
                     <div className="flex items-end w-full">
@@ -163,13 +166,13 @@ export const AiForm = () => {
                   onClick={() => window.location.reload()}
                   className="rounded-lg md:rounded-xl cursor-pointer text-center w-full font-[400] text-xs md:text-2xl shadow-md py-4 bg-[#D9D9D9]"
                 >
-                  새로 고침
+                  {Lang[lang].refresh}
                 </div>
                 <div
-                  onClick={() => router.push("/result")}
+                  onClick={() => router.push(`/result?lang=${lang ?? "ko"}`)}
                   className="bg-[#00387F] rounded-lg md:rounded-xl text-xs font-[400] md:text-2xl cursor-pointer shadow-md py-4 text-white text-center w-full"
                 >
-                  결과 보기
+                  {Lang[lang].viewResult}
                 </div>
               </div>
             ) : (
@@ -190,9 +193,7 @@ export const AiForm = () => {
                     resizeTextarea();
                   }}
                   placeholder={
-                    isLoading
-                      ? "문진을 생성중입니다. 잠시 기다려주세요."
-                      : "문진에 대한 답변을 입력해주세요."
+                    isLoading ? Lang[lang].genMedical : Lang[lang].input
                   }
                   onKeyDown={(e) =>
                     e.key === "Enter" &&
@@ -227,7 +228,7 @@ export const AiForm = () => {
         </div>
       </div>
       <div className="z-1 w-full text-xs md:text-xl text-[#777] font-[300] text-center mt-4">
-        ※정확한 진단은 내방하셔서 의사의 처방을 받으시길 바랍니다.
+        ※{Lang[lang].precautions}
       </div>
     </div>
   );
