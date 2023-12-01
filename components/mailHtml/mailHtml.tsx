@@ -3,7 +3,7 @@ import { useState, useEffect, Fragment, Dispatch } from "react";
 import { Report } from "@/models/report";
 import { useRouter, useSearchParams } from "next/navigation";
 import pako from "pako";
-import generateRandomId from "@/utils/idGenergator";
+import generateRandomId from "@/utils/idGenerator";
 
 type MailHtmlProps = {
   setShare?: Dispatch<ShareData>;
