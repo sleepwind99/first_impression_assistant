@@ -9,9 +9,9 @@ import Yonsei from "@/public/icons/yonsei.svg?url";
 import Image from "next/image";
 import { CiUser } from "react-icons/ci";
 import Send from "@/public/icons/send.svg?url";
-import generateRandomId from "@/utils/idGenergator";
+import generateRandomId from "@/utils/idGenerator";
 import Robot from "@/public/svgs/Robot";
-import { Lang } from "@/lang/lang";
+import { LangContents } from "@/lang/lang";
 
 // AI와 대화할 수 있는 form
 export const AiForm = () => {
@@ -30,7 +30,7 @@ export const AiForm = () => {
   const chatbgRef = useRef<HTMLDivElement>(null); // 대화 내용/기록을 감싸는 div element
   const [isResult, setIsResult] = useState(false); // 결과 보고서를 받았는지 여부
   const [isAutoScroll, setIsAutoScroll] = useState(true); // 대화 내용/기록이 업데이트 될 때마다 자동으로 스크롤을 내릴지 여부
-  const [lang, setLang] = useState<keyof typeof Lang>("ko"); // 언어 설정
+  const [lang, setLang] = useState<keyof typeof LangContents>("ko"); // 언어 설정
   const router = useRouter();
 
   // textarea의 높이를 자동으로 조절하는 함수
@@ -53,13 +53,13 @@ export const AiForm = () => {
 
   // 최초 렌더링 시 대화 내용/기록에 "어디가 불편해서 방문하신건가요?"를 추가
   useEffect(() => {
-    const tempLang = (param.get("lang") as keyof typeof Lang) ?? "ko";
+    const tempLang = (param.get("lang") as keyof typeof LangContents) ?? "ko";
     setLang(tempLang);
     setMessages([
       {
         role: "assistant",
         id: new Date().getTime().toString(),
-        content: Lang[tempLang].firstQuestion,
+        content: LangContents[tempLang].firstQuestion,
         createdAt: new Date(),
       },
     ]);
@@ -124,7 +124,7 @@ export const AiForm = () => {
                   <div className="w-full">
                     {chat.role === "assistant" && (
                       <p className="text-xs md:text-xl ml-5 mb-2">
-                        {Lang[lang].assistant}
+                        {LangContents[lang].assistant}
                       </p>
                     )}
                     <div className="flex items-end w-full">
@@ -166,13 +166,13 @@ export const AiForm = () => {
                   onClick={() => window.location.reload()}
                   className="rounded-lg md:rounded-xl cursor-pointer text-center w-full font-[400] text-xs md:text-2xl shadow-md py-4 bg-[#D9D9D9]"
                 >
-                  {Lang[lang].refresh}
+                  {LangContents[lang].refresh}
                 </div>
                 <div
                   onClick={() => router.push(`/result?lang=${lang ?? "ko"}`)}
                   className="bg-[#00387F] rounded-lg md:rounded-xl text-xs font-[400] md:text-2xl cursor-pointer shadow-md py-4 text-white text-center w-full"
                 >
-                  {Lang[lang].viewResult}
+                  {LangContents[lang].viewResult}
                 </div>
               </div>
             ) : (
@@ -193,7 +193,9 @@ export const AiForm = () => {
                     resizeTextarea();
                   }}
                   placeholder={
-                    isLoading ? Lang[lang].genMedical : Lang[lang].input
+                    isLoading
+                      ? LangContents[lang].genMedical
+                      : LangContents[lang].input
                   }
                   onKeyDown={(e) =>
                     e.key === "Enter" &&
@@ -228,7 +230,7 @@ export const AiForm = () => {
         </div>
       </div>
       <div className="z-1 w-full text-xs md:text-xl text-[#777] font-[300] text-center mt-4">
-        ※{Lang[lang].precautions}
+        ※{LangContents[lang].precautions}
       </div>
     </div>
   );

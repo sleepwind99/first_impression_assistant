@@ -2,15 +2,15 @@
 import Link from "next/link";
 import Image from "next/image";
 import Logo from "@/public/icons/logo.svg?url";
-import { Lang } from "@/lang/lang";
+import { LangContents } from "@/lang/lang";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 
 const HeaderLogo = () => {
   const param = useSearchParams();
-  const [lang, setLang] = useState<keyof typeof Lang>("ko");
+  const [lang, setLang] = useState<keyof typeof LangContents>("ko");
   useEffect(() => {
-    const lang = (param.get("lang") as keyof typeof Lang) ?? "ko";
+    const lang = (param.get("lang") as keyof typeof LangContents) ?? "ko";
     setLang(lang);
   }, []);
   return (
@@ -25,7 +25,7 @@ const HeaderLogo = () => {
           className="w-[132px] h-[23px] md:w-[213px] md:h-[37px]"
         />
         <h1 className="text-base md:text-2xl font-[600] xl:font-[500] text-[#767575]">
-          {Lang[lang].logo}
+          {LangContents[lang].logo}
         </h1>
       </div>
     </Link>
