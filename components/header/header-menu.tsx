@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Image from "next/image";
 import Menu from "@/public/icons/menu.svg?url";
 import { LangModal } from "@/components/modal/langModal";
@@ -12,17 +12,18 @@ export function MenuIcon() {
   const [onMenu, setOnMenu] = useState(false);
   const router = useRouter();
   const path = usePathname();
+  const selectRef = useRef<HTMLSelectElement>(null);
+
   return isMobile ? (
-    <select className="outline-none border-[1px] border-[#777] pr-5 pl-2 py-1 rounded-lg">
+    <select
+      onChange={(e) => {
+        router.push(`${path}?lang=${e.target.value}`);
+        setTimeout(() => window.location.reload(), 100);
+      }}
+      className="outline-none border-[1px] border-[#777] text-xs px-1 py-1 rounded-lg"
+    >
       {LangList.map((lang) => (
-        <option
-          key={generateRandomId(15)}
-          value={lang.value}
-          onClick={() => {
-            router.push(`${path}?lang=${lang.value}`);
-            setTimeout(() => window.location.reload(), 100);
-          }}
-        >
+        <option key={generateRandomId(15)} value={lang.value}>
           {lang.label}
         </option>
       ))}
