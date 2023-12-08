@@ -93,15 +93,8 @@ export const AiForm = () => {
     }
   }, [isLoading]);
   return (
-    <div className="flex flex-col w-full h-full">
-      {/* <p className="z-1 w-full mt-5 text-xs md:text-base md:leading-5 text-[#777] font-[300] text-center md:mt-4">
-        {`성명에는 가명(김모씨 등)을 써도 괜찮습니다. `}
-        <br />
-        {`통증 정도는 0(약)부터 10(강)까지로 기입해 주시기 바랍니다.`}
-        <br />
-        {`날짜, 위치, 갯수 등의 정보는 숫자로 표현해주시기 바랍니다. `}
-      </p> */}
-      <div className="max-w-[1400px] flex-1 overflow-hidden w-full rounded-xl md:rounded-3xl bg-white mt-2 pt-4 md:mt-3 shadow-lg px-3 xl:px-auto mx-auto">
+    <div className="flex flex-col w-full h-full pt-4">
+      <div className="max-w-[1400px] flex-1 overflow-hidden w-full rounded-xl md:rounded-3xl bg-white mt-2 pt-2 md:mt-3 shadow-lg px-3 xl:px-auto mx-auto">
         <div className="w-full h-full pt-2 pb-4 md:pt-4 md:pb-8 flex flex-col max-w-[1200px] mx-auto">
           <div className="flex-1 overflow-hidden px-3">
             <div
