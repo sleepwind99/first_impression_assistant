@@ -11,6 +11,8 @@ import Close from "@/public/icons/close.svg?url";
 import { MailHtml } from "@/components/mailHtml/mailHtml";
 import Image from "next/image";
 import { LangContents } from "@/lang/lang";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 export function FirstAppointmentModal() {
   const overlay = useRef<HTMLDivElement>(null);
@@ -40,6 +42,27 @@ export function FirstAppointmentModal() {
     } else {
       console.log("브라우저가 Web Share API를 지원하지 않습니다.");
     }
+  };
+
+  const getPdf = () => {
+    const input = document.getElementById("report"); // 변환하고자 하는 컴포넌트의 ID
+    if (!input) return;
+    html2canvas(input, { scale: 2 }).then((canvas) => {
+      const imgData = canvas.toDataURL("image/png");
+      // PDF 페이지 크기를 mm 단위로 변환 (1px = 0.264583 mm)
+      const pdfWidth = canvas.width * 0.264583;
+      const pdfHeight = canvas.height * 0.264583;
+
+      // PDF 인스턴스 생성시 페이지 크기 설정
+      const pdf = new jsPDF({
+        orientation: "portrait",
+        unit: "mm",
+        format: [pdfWidth, pdfHeight],
+      });
+
+      pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+      pdf.save(`report.pdf`);
+    });
   };
 
   const onKeyDown = useCallback(
@@ -82,9 +105,12 @@ export function FirstAppointmentModal() {
             >
               {LangContents[lang].share}
             </button>
-            {/* <button className="bg-white text-xs py-2 px-3 md:py-3 md:px-6 rounded-lg md:rounded-xl md:text-xl mr-4 md:mr-8">
-              전문의에 문의
-            </button> */}
+            <button
+              onClick={getPdf}
+              className="bg-white text-xs py-2 px-3 md:py-3 md:px-6 rounded-lg md:rounded-xl md:text-xl mr-4 md:mr-8"
+            >
+              PDF 추출
+            </button>
             <Image
               ref={closeRef}
               onClick={(e) => {

@@ -28,6 +28,8 @@
     "eslint-config-next": "13.4.2",
     "eventsource-parser": "^1.1.1",
     "fs": "^0.0.1-security",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^2.5.1",
     "next": "latest",
     "next-auth": "^4.23.2",
     "nodemailer": "^6.9.2",

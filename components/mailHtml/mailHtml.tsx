@@ -57,9 +57,9 @@ export const MailHtml = ({ setShare }: MailHtmlProps) => {
 };
 
 // 환자의 정보를 테이블로 보여주는 컴포넌트
-const NewTable = ({ data }: { data: Report }) => {
+export const NewTable = ({ data }: { data: Report }) => {
   return (
-    <div className="p-4 md:p-12">
+    <div id="report" className="p-4 md:p-12">
       <h2 className="px-2 text-base md:text-2xl border-l-4 border-l-[#000D47] font-[500] mb-4 md:mb-5">
         환자 정보
       </h2>
