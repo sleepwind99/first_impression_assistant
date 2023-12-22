@@ -30,12 +30,13 @@ export const MailHtml = ({ setShare }: MailHtmlProps) => {
       const compressed = pako.deflate(jsonString);
       const base64Encoded = Buffer.from(compressed).toString("base64");
       const urlSafeEncoded = encodeURIComponent(base64Encoded);
-      const url = `${new URL(window.location.href)}?report=${urlSafeEncoded}`;
+      const urlObj = new URL(window.location.href);
+      urlObj.searchParams.set("report", urlSafeEncoded);
       if (setShare)
         setShare({
           title: "AI 초진 시스템",
           text: `${report.name}님의 AI 초진 보고서입니다.`,
-          url,
+          url: urlObj.toString(),
         });
       return;
     }
